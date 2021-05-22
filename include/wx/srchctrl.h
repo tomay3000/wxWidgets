@@ -16,7 +16,27 @@
 
 #include "wx/textctrl.h"
 
-#if (!defined(__WXMAC__) && !defined(__WXGTK20__)) || defined(__WXUNIVERSAL__)
+#ifndef __WXUNIVERSAL__
+    #if defined(__WXMSW__) || defined(__WXMAC__)
+        // search control was introduced in Mac OS X 10.3 Panther
+        #define wxUSE_NATIVE_SEARCH_CONTROL 1
+
+        #define wxSearchCtrlBaseBaseClass wxTextCtrl
+    #elif defined(__WXGTK20__)
+        // Use GtkSearchEntry if available, construct a similar one using GtkEntry
+        // otherwise.
+        #define wxUSE_NATIVE_SEARCH_CONTROL 1
+
+        class WXDLLIMPEXP_CORE wxGTKSearchCtrlBase
+            : public wxControl, public wxTextEntry
+        {
+        };
+
+        #define wxSearchCtrlBaseBaseClass wxGTKSearchCtrlBase
+    #endif
+#endif // !__WXUNIVERSAL__
+
+#ifndef wxUSE_NATIVE_SEARCH_CONTROL
     // no native version, use the generic one
     #define wxUSE_NATIVE_SEARCH_CONTROL 0
 
@@ -24,27 +44,11 @@
     #include "wx/containr.h"
 
     class WXDLLIMPEXP_CORE wxSearchCtrlBaseBaseClass
-        : public wxCompositeWindow< wxNavigationEnabled<wxControl> >,
-          public wxTextCtrlIface
+        : public wxCompositeWindow<wxNavigationEnabled<wxControl>>,
+        public wxTextCtrlIface
     {
     };
-#elif defined(__WXMAC__)
-    // search control was introduced in Mac OS X 10.3 Panther
-    #define wxUSE_NATIVE_SEARCH_CONTROL 1
-
-    #define wxSearchCtrlBaseBaseClass wxTextCtrl
-#elif defined(__WXGTK20__)
-    // Use GtkSearchEntry if available, construct a similar one using GtkEntry
-    // otherwise.
-    #define wxUSE_NATIVE_SEARCH_CONTROL 1
-
-    class WXDLLIMPEXP_CORE wxGTKSearchCtrlBase
-        : public wxControl, public wxTextEntry
-    {
-    };
-
-    #define wxSearchCtrlBaseBaseClass wxGTKSearchCtrlBase
-#endif
+#endif // !wxUSE_NATIVE_SEARCH_CONTROL
 
 // ----------------------------------------------------------------------------
 // constants
@@ -91,17 +95,18 @@ private:
     virtual wxWindow *GetEditableWindow() wxOVERRIDE { return this; }
 };
 
-
 // include the platform-dependent class implementation
 #if wxUSE_NATIVE_SEARCH_CONTROL
-    #if defined(__WXMAC__)
+    #if defined(__WXMSW__)
+        #include "wx/msw/srchctrl.h"
+    #elif defined(__WXMAC__)
         #include "wx/osx/srchctrl.h"
     #elif defined(__WXGTK__)
         #include "wx/gtk/srchctrl.h"
     #endif
 #else
     #include "wx/generic/srchctlg.h"
-#endif
+#endif // wxUSE_NATIVE_SEARCH_CONTROL
 
 // ----------------------------------------------------------------------------
 // macros for handling search events

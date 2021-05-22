@@ -3303,6 +3303,7 @@ COND_TOOLKIT_MSW_GUI_HDR =  \
 	wx/msw/slider.h \
 	wx/msw/spinbutt.h \
 	wx/msw/spinctrl.h \
+	wx/msw/srchctrl.h \
 	wx/msw/statbmp.h \
 	wx/msw/statbox.h \
 	wx/msw/statusbar.h \
@@ -5616,6 +5617,7 @@ COND_TOOLKIT_MSW___GUI_SRC_OBJECTS =  \
 	monodll_msw_slider.o \
 	monodll_msw_spinbutt.o \
 	monodll_msw_spinctrl.o \
+	monodll_msw_srchctrl.o \
 	monodll_msw_statbmp.o \
 	monodll_msw_statbox.o \
 	monodll_msw_statusbar.o \
@@ -7609,6 +7611,7 @@ COND_TOOLKIT_MSW___GUI_SRC_OBJECTS_1 =  \
 	monolib_msw_slider.o \
 	monolib_msw_spinbutt.o \
 	monolib_msw_spinctrl.o \
+	monolib_msw_srchctrl.o \
 	monolib_msw_statbmp.o \
 	monolib_msw_statbox.o \
 	monolib_msw_statusbar.o \
@@ -9752,6 +9755,7 @@ COND_TOOLKIT_MSW___GUI_SRC_OBJECTS_2 =  \
 	coredll_msw_slider.o \
 	coredll_msw_spinbutt.o \
 	coredll_msw_spinctrl.o \
+	coredll_msw_srchctrl.o \
 	coredll_msw_statbmp.o \
 	coredll_msw_statbox.o \
 	coredll_msw_statusbar.o \
@@ -11477,6 +11481,7 @@ COND_TOOLKIT_MSW___GUI_SRC_OBJECTS_3 =  \
 	corelib_msw_slider.o \
 	corelib_msw_spinbutt.o \
 	corelib_msw_spinctrl.o \
+	corelib_msw_srchctrl.o \
 	corelib_msw_statbmp.o \
 	corelib_msw_statbox.o \
 	corelib_msw_statusbar.o \
@@ -16445,6 +16450,9 @@ monodll_msw_spinbutt.o: $(srcdir)/src/msw/spinbutt.cpp $(MONODLL_ODEP)
 
 monodll_msw_spinctrl.o: $(srcdir)/src/msw/spinctrl.cpp $(MONODLL_ODEP)
 	$(CXXC) -c -o $@ $(MONODLL_CXXFLAGS) $(srcdir)/src/msw/spinctrl.cpp
+
+monodll_msw_srchctrl.o: $(srcdir)/src/msw/srchctrl.cpp $(MONODLL_ODEP)
+	$(CXXC) -c -o $@ $(MONODLL_CXXFLAGS) $(srcdir)/src/msw/srchctrl.cpp
 
 monodll_msw_statbmp.o: $(srcdir)/src/msw/statbmp.cpp $(MONODLL_ODEP)
 	$(CXXC) -c -o $@ $(MONODLL_CXXFLAGS) $(srcdir)/src/msw/statbmp.cpp
@@ -21722,6 +21730,9 @@ monolib_msw_spinbutt.o: $(srcdir)/src/msw/spinbutt.cpp $(MONOLIB_ODEP)
 
 monolib_msw_spinctrl.o: $(srcdir)/src/msw/spinctrl.cpp $(MONOLIB_ODEP)
 	$(CXXC) -c -o $@ $(MONOLIB_CXXFLAGS) $(srcdir)/src/msw/spinctrl.cpp
+
+monolib_msw_srchctrl.o: $(srcdir)/src/msw/srchctrl.cpp $(MONOLIB_ODEP)
+	$(CXXC) -c -o $@ $(MONOLIB_CXXFLAGS) $(srcdir)/src/msw/srchctrl.cpp
 
 monolib_msw_statbmp.o: $(srcdir)/src/msw/statbmp.cpp $(MONOLIB_ODEP)
 	$(CXXC) -c -o $@ $(MONOLIB_CXXFLAGS) $(srcdir)/src/msw/statbmp.cpp
@@ -27669,6 +27680,9 @@ coredll_msw_spinbutt.o: $(srcdir)/src/msw/spinbutt.cpp $(COREDLL_ODEP)
 coredll_msw_spinctrl.o: $(srcdir)/src/msw/spinctrl.cpp $(COREDLL_ODEP)
 	$(CXXC) -c -o $@ $(COREDLL_CXXFLAGS) $(srcdir)/src/msw/spinctrl.cpp
 
+coredll_msw_srchctrl.o: $(srcdir)/src/msw/srchctrl.cpp $(COREDLL_ODEP)
+	$(CXXC) -c -o $@ $(COREDLL_CXXFLAGS) $(srcdir)/src/msw/srchctrl.cpp
+
 coredll_msw_statbmp.o: $(srcdir)/src/msw/statbmp.cpp $(COREDLL_ODEP)
 	$(CXXC) -c -o $@ $(COREDLL_CXXFLAGS) $(srcdir)/src/msw/statbmp.cpp
 
@@ -31922,6 +31936,9 @@ corelib_msw_spinbutt.o: $(srcdir)/src/msw/spinbutt.cpp $(CORELIB_ODEP)
 
 corelib_msw_spinctrl.o: $(srcdir)/src/msw/spinctrl.cpp $(CORELIB_ODEP)
 	$(CXXC) -c -o $@ $(CORELIB_CXXFLAGS) $(srcdir)/src/msw/spinctrl.cpp
+
+corelib_msw_srchctrl.o: $(srcdir)/src/msw/srchctrl.cpp $(CORELIB_ODEP)
+	$(CXXC) -c -o $@ $(CORELIB_CXXFLAGS) $(srcdir)/src/msw/srchctrl.cpp
 
 corelib_msw_statbmp.o: $(srcdir)/src/msw/statbmp.cpp $(CORELIB_ODEP)
 	$(CXXC) -c -o $@ $(CORELIB_CXXFLAGS) $(srcdir)/src/msw/statbmp.cpp

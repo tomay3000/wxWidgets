@@ -103,41 +103,6 @@ protected:
         }
     }
 
-#ifdef __WXMSW__
-    // We increase the text control height to be the same as for the controls
-    // with border as this is what we actually need here because even though
-    // this control itself is borderless, it's inside wxSearchCtrl which does
-    // have the border and so should have the same height as the normal text
-    // entries with border.
-    //
-    // This is a bit ugly and it would arguably be better to use whatever size
-    // the base class version returns and just centre the text vertically in
-    // the search control but I failed to modify the code in LayoutControls()
-    // to do this easily and as there is much in that code I don't understand
-    // (notably what is the logic for buttons sizing?) I prefer to not touch it
-    // at all.
-    virtual wxSize DoGetBestSize() const wxOVERRIDE
-    {
-        const long flags = GetWindowStyleFlag();
-        wxSearchTextCtrl* const self = const_cast<wxSearchTextCtrl*>(this);
-
-        self->SetWindowStyleFlag((flags & ~wxBORDER_MASK) | wxBORDER_DEFAULT);
-        wxSize size = wxTextCtrl::DoGetBestSize();
-
-        // The calculation for no external borders in wxTextCtrl::DoGetSizeFromTextSize also
-        // removes any padding around the value, which is wrong for this situation. So we
-        // can't use wxBORDER_NONE to calculate a good height, in which case we just have to
-        // assume a border in the code above and then subtract the space that would be taken up
-        // by a themed border (the thin blue border and the white internal border).
-        // Don't use FromDIP(4), this seems not needed.
-        size.y -= 4;
-
-        self->SetWindowStyleFlag(flags);
-
-        return size;
-    }
-#endif // __WXMSW__
-
 private:
     wxSearchCtrl* m_search;
 
@@ -518,16 +483,6 @@ void wxSearchCtrl::LayoutControls()
         x += sizeSearch.x;
         x += searchMargin;
     }
-
-#ifdef __WXMSW__
-    // The text control is too high up on Windows; normally a text control looks OK because
-    // of the white border that's part of the theme border. We can also remove a pixel from
-    // the height to fit the text control in, because the padding in EDIT_HEIGHT_FROM_CHAR_HEIGHT
-    // is already generous.
-    int textY = FromDIP(1);
-#else
-    int textY = 0;
-#endif
 
     m_text->SetSize(x, textY, textWidth, height-textY);
     x += textWidth;
@@ -948,10 +903,10 @@ static void RescaleBitmap(wxBitmap& bmp, const wxSize& sizeNeeded)
 #else // !wxUSE_IMAGE
     // Fallback method of scaling the bitmap
     wxBitmap newBmp(sizeNeeded, bmp.GetDepth());
-#if defined(__WXMSW__) || defined(__WXOSX__)
-    // wxBitmap::UseAlpha() is used only on wxMSW and wxOSX.
+#ifdef __WXOSX__
+    // wxBitmap::UseAlpha() is used only on wxOSX.
     newBmp.UseAlpha(bmp.HasAlpha());
-#endif // __WXMSW__ || __WXOSX__
+#endif // __WXOSX__
     {
         wxMemoryDC dc(newBmp);
         double scX = (double)sizeNeeded.GetWidth() / bmp.GetWidth();

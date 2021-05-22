@@ -2030,6 +2030,7 @@ set(MSW_SRC
     src/msw/slider.cpp
     src/msw/spinbutt.cpp
     src/msw/spinctrl.cpp
+    src/msw/srchctrl.cpp
     src/msw/statbmp.cpp
     src/msw/statbox.cpp
     src/msw/statusbar.cpp
@@ -2136,6 +2137,7 @@ set(MSW_HDR
     wx/msw/slider.h
     wx/msw/spinbutt.h
     wx/msw/spinctrl.h
+    wx/msw/srchctrl.h
     wx/msw/statbmp.h
     wx/msw/statbox.h
     wx/msw/statusbar.h

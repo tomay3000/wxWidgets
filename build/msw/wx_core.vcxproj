@@ -864,6 +864,7 @@
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)msw_%(Filename).obj</ObjectFileName>
     </ClCompile>
     <ClCompile Include="..\..\src\msw\spinctrl.cpp" />
+    <ClCompile Include="..\..\src\msw\srchctrl.cpp" />
     <ClCompile Include="..\..\src\msw\statbmp.cpp">
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">$(IntDir)msw_%(Filename).obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='DLL Debug|x64'">$(IntDir)msw_%(Filename).obj</ObjectFileName>
@@ -1184,6 +1185,7 @@
     <ClInclude Include="..\..\include\wx\msw\slider.h" />
     <ClInclude Include="..\..\include\wx\msw\spinbutt.h" />
     <ClInclude Include="..\..\include\wx\msw\spinctrl.h" />
+    <ClInclude Include="..\..\include\wx\msw\srchctrl.h" />
     <ClInclude Include="..\..\include\wx\msw\statbmp.h" />
     <ClInclude Include="..\..\include\wx\msw\statbox.h" />
     <ClInclude Include="..\..\include\wx\msw\statline.h" />
